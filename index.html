@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Mercado | Arquitecto de Software & Project Director</title>
+    <meta name="description" content="Más de 20 años transformando ideas en arquitecturas robustas. Especialista en SOA, microservicios, fintech y liderazgo de equipos técnicos.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --tars-orange: #FF6B35;
+            --kipp-cyan: #00D4FF;
+            --case-blue: #2E86AB;
+            --plex-purple: #9D4EDD;
+            --dark-bg: #0A0E1A;
+            --darker-bg: #05070F;
+            --card-bg: #111827;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --border-color: #1E293B;
+            --gradient-hero: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f3a 100%);
+            --gradient-accent: linear-gradient(90deg, var(--tars-orange), var(--kipp-cyan));
+            --glow-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+        a { color: var(--kipp-cyan); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--tars-orange); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 100px 0; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-content { text-align: center; z-index: 1; }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 16px;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+        .hero-tagline {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+        .hero-cta {
+            display: inline-flex;
+            gap: 16px;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+        .btn {
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--dark-bg);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--kipp-cyan);
+            color: var(--kipp-cyan);
+        }
+        .btn-secondary:hover {
+            background: var(--kipp-cyan);
+            color: var(--dark-bg);
+        }
+
+        /* SECTION HEADER */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+            box-shadow: var(--glow-shadow);
+        }
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 24px auto 0;
+        }
+
+        /* ABOUT */
+        .about { background: var(--darker-bg); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+            color: var(--kipp-cyan);
+        }
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1.0625rem;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            border-color: var(--kipp-cyan);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 8px;
+        }
+
+        /* ACHIEVEMENTS */
+        .achievements { background: var(--dark-bg); }
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .achievement-card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .achievement-card:hover {
+            border-color: var(--tars-orange);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        .achievement-card:hover::before {
+            opacity: 1;
+        }
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .achievement-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .achievement-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        .achievement-metric {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--kipp-cyan);
+            margin-top: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* EXPERIENCE */
+        .experience { background: var(--darker-bg); }
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+        }
+        .experience-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .experience-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        .experience-content {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            max-width: 400px;
+            margin: 0 40px;
+            transition: all 0.3s ease;
+        }
+        .experience-content:hover {
+            border-color: var(--tars-orange);
+            transform: scale(1.02);
+            box-shadow: var(--glow-shadow);
+        }
+        .experience-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--kipp-cyan);
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        .experience-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .experience-content .company {
+            color: var(--tars-orange);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .experience-content p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* SKILLS */
+        .skills { background: var(--dark-bg); }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        .skill-category {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .skill-category:hover {
+            border-color: var(--case-blue);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        .skill-category h3 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: var(--kipp-cyan);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--kipp-cyan);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            background: var(--kipp-cyan);
+            color: var(--dark-bg);
+        }
+
+        /* CERTIFICATIONS */
+        .certifications { background: var(--darker-bg); }
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .cert-card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .cert-card:hover {
+            border-color: var(--plex-purple);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        .cert-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .cert-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .cert-org {
+            color: var(--plex-purple);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .cert-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        .cert-badge {
+            display: inline-block;
+            background: rgba(157, 78, 221, 0.2);
+            color: var(--plex-purple);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 12px;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        /* PHILOSOPHY */
+        .philosophy { background: var(--dark-bg); }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+        .philosophy-card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .philosophy-card:hover {
+            border-color: var(--tars-orange);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        .philosophy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .philosophy-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .philosophy-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* PROJECTS */
+        .projects { background: var(--darker-bg); }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            border-color: var(--case-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .project-content { padding: 32px; }
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 20px;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .project-tech span {
+            background: rgba(46, 134, 171, 0.2);
+            color: var(--case-blue);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(46, 134, 171, 0.3);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--darker-bg);
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-brand p { color: var(--text-secondary); font-size: 0.9375rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-secondary); transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--kipp-cyan); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        .agent-links {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-tagline { font-size: 1.125rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: repeat(2, 1fr); }
+            .experience-timeline::before { left: 20px; }
+            .experience-item, .experience-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-right: 0;
+                padding-left: 60px;
+            }
+            .experience-content { margin: 0 0 0 40px; }
+            .experience-dot { left: 20px; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .cert-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            .agent-links { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Cristian Mercado</h1>
+                <p class="hero-subtitle">Arquitecto de Software & Project Director</p>
+                <p class="hero-tagline">+20 años transformando ideas en arquitecturas robustas</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">Ver Proyectos</a>
+                    <a href="#contact" class="btn btn-secondary">Contactar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sobre Mí</h2>
+                <p>Más de dos décadas construyendo soluciones empresariales</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h3>Arquitecto de Software & Director de Proyectos</h3>
+                    <p>Con más de <strong>20 años de experiencia</strong> en tecnologías de la información, he perfeccionado mi práctica como Arquitecto de Software y Director, especializándome en gestión de proyectos complejos, desarrollo de software, mejora de procesos y aseguramiento de la calidad.</p>
+                    <p>Mi carrera ha estado marcada por un fuerte enfoque en el <strong>diseño e implementación de arquitecturas de software robustas</strong> que impulsan la innovación y la eficiencia dentro de las organizaciones. He liderado proyectos con presencia en <strong>5 países</strong>, desde soluciones fintech hasta sistemas de administración pública.</p>
+                    <p>Actualmente dirijo proyectos de arquitectura SOA y microservicios, liderazgo de Mobile Software Factory, y certificación PCI DSS para pagos móviles a nivel nacional.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Años de Experiencia</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Países con Proyectos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Proyectos Arquitectados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Desarrolladores Liderados</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="achievements">
+        <div class="container">
+            <div class="section-header">
+                <h2>Logros Cuantificables</h2>
+                <p>Impacto medible en cada organización</p>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">📈</div>
+                    <h3>Mejora de Procesos Públicos</h3>
+                    <p>Digitalización de trámites y adquisiciones públicas, reduciendo tiempos de espera para ciudadanos.</p>
+                    <div class="achievement-metric">90% Mejora</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">⚡</div>
+                    <h3>Procesamiento de Datos</h3>
+                    <p>Automatización de ETL para generación de datos de testing en banca, reduciendo semanas a días.</p>
+                    <div class="achievement-metric">500% Incremento</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🌎</div>
+                    <h3>Alcance Internacional</h3>
+                    <p>Dirección de proyectos de software con presencia multinacional y coordinación de equipos offshore.</p>
+                    <div class="achievement-metric">5 Países</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🎯</div>
+                    <h3>Gestión Multitarea</h3>
+                    <p>Coordinación simultánea de múltiples proyectos críticos con equipos distribuidos globalmente.</p>
+                    <div class="achievement-metric">12 Proyectos Simultáneos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2>Experiencia Profesional</h2>
+                <p>Más de 20 años transformando desafíos técnicos en soluciones empresariales</p>
+            </div>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h3>Project Director / Solution Architect</h3>
+                        <span class="company">Empresa de Software Empresarial | 2013 - Actual</span>
+                        <p>Dirección de proyectos con presencia en 5 países. Arquitectura de soluciones SOA y microservicios. Liderazgo de Mobile Software Factory. Certificación PCI DSS para pagos móviles. Proyectos de Fintech y pagos móviles a nivel nacional.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h3>Founder & CEO</h3>
+                        <span class="company">Consultora de Software | 2011 - Actual</span>
+                        <p>Fundador de empresa de consultoría y desarrollo de software. Gestión financiera y ventas de proyectos. Desarrollo de soluciones web y móviles cross-platform. Creación de MVPs con metodologías LEAN Startup.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h3>Channel Lead</h3>
+                        <span class="company">Consultora Global | 2009 - 2011</span>
+                        <p>Data Management para pruebas funcionales en banca. Automatización de datos (ETL para Testing). Gestión de recursos offshore (India). Incremento de 500% en procesamiento de datos.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h3>Project Leader / Head Developer</h3>
+                        <span class="company">Sector Bancario y Retail | 2007 - 2009</span>
+                        <p>Planificación y desarrollo de software para banca y retail. Sistemas de gestión de riesgos (RMS). Reingeniería de sistemas legacy. Gestión de hasta 12 proyectos simultáneos.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h3>Development Manager</h3>
+                        <span class="company">Administración Pública | 2003 - 2007</span>
+                        <p>Desarrollo de software para administración pública. Mejora de procesos públicos en línea (90% de mejora). Implementación de BPM y Office Interop. Certificación ISO 9000/2000 del departamento.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <h3>Software Analyst / Developer</h3>
+                        <span class="company">Desarrollo Web & Redes | 1999 - 2003</span>
+                        <p>Desarrollo de software para clientes locales. Diseño de sitios web dinámicos. Integración con ASP 3 y componentes Active X. Diseño e implementación de redes CISCO.</p>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Skills & Tecnologías</h2>
+                <p>Stack tecnológico dominado a lo largo de 20+ años</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🏗️ Arquitectura</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">SOA</span>
+                        <span class="skill-tag">Microservicios</span>
+                        <span class="skill-tag">Event-Driven</span>
+                        <span class="skill-tag">API Gateway</span>
+                        <span class="skill-tag">ESB/EAI</span>
+                        <span class="skill-tag">Web Services (SOAP/WSDL)</span>
+                        <span class="skill-tag">WCF</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Frontend & Mobile</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Swift (iOS)</span>
+                        <span class="skill-tag">Kotlin (Android)</span>
+                        <span class="skill-tag">Ionic</span>
+                        <span class="skill-tag">HTML/CSS/JS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>⚙️ Backend & Cloud</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">.NET Framework</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">AWS CDK</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">SharePoint</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🗄️ Data & Integration</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">Oracle</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">ETL</span>
+                        <span class="skill-tag">EDI/AS2</span>
+                        <span class="skill-tag">BizTalk Server</span>
+                        <span class="skill-tag">AWS EventBridge</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>📊 Gestión & Procesos</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">PCI DSS</span>
+                        <span class="skill-tag">ISO 9000/2000</span>
+                        <span class="skill-tag">BPM</span>
+                        <span class="skill-tag">LEAN Startup</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">UML</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🤖 IA & Modern Tools</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">OpenClaw</span>
+                        <span class="skill-tag">GitHub Copilot</span>
+                        <span class="skill-tag">OpenCode CLI</span>
+                        <span class="skill-tag">AI-Assisted Development</span>
+                        <span class="skill-tag">Multi-Agent Systems</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2>Certificaciones y Reconocimientos</h2>
+                <p>Formación continua y distinciones académicas</p>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">📜</div>
+                    <h3>TOEIC - Test of English for International Communication</h3>
+                    <span class="cert-org">ETS (Educational Testing Service)</span>
+                    <p>Certificación de inglés técnico para comunicación internacional. Comunicación con equipos offshore, clientes internacionales y documentación técnica.</p>
+                    <span class="cert-badge">915/990 Puntos - Nivel Avanzado C1</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🎓</div>
+                    <h3>Instructor Oracle Academy</h3>
+                    <span class="cert-org">BSD Enterprise</span>
+                    <p>Instructor certificado para tecnologías Oracle. Capacitación a desarrolladores internos en desarrollo enterprise con Oracle.</p>
+                    <span class="cert-badge">Instructor Certificado 2014-2015</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🎤</div>
+                    <h3>Ponencia: Tecnología Móvil</h3>
+                    <span class="cert-org">Universidad del Norte</span>
+                    <p>Ponencia académica sobre tendencias y desarrollo de tecnología móvil para estudiantes y profesionales de TI.</p>
+                    <span class="cert-badge">Ponente 2016</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🏭</div>
+                    <h3>Ponencia: Mobile Factory Development</h3>
+                    <span class="cert-org">Universidad Regiomontana (U-ERRE)</span>
+                    <p>Ponencia especializada sobre desarrollo de fábricas de software móvil. Experiencia en creación y operación de Mobile Software Factory.</p>
+                    <span class="cert-badge">Ponente 2016</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">⚖️</div>
+                    <h3>Juez en Feria de Tecnología</h3>
+                    <span class="cert-org">Universidad del Norte</span>
+                    <p>Evaluador académico de proyectos tecnológicos estudiantiles. Participación en 2 ediciones consecutivas.</p>
+                    <span class="cert-badge">Juez 2015-2016</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">📐</div>
+                    <h3>Diseño y Arquitectura de Software</h3>
+                    <span class="cert-org">Accenture</span>
+                    <p>Escuela de Diseño y Arquitectura de Software. Patrones de diseño, arquitectura de software y mejores prácticas para proyectos bancarios.</p>
+                    <span class="cert-badge">Diploma 2009-2010</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section id="philosophy" class="philosophy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Filosofía de Trabajo</h2>
+                <p>Principios que guían cada decisión técnica</p>
+            </div>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🌐</div>
+                    <h3>Web First</h3>
+                    <p>Lo que funciona en la web, funciona en todos lados. Priorizo soluciones web que escalan a móvil y desktop sin duplicar esfuerzo.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">📖</div>
+                    <h3>Documentación</h3>
+                    <p>Si no está documentado, no existe. La documentación es conocimiento que sobrevive a las sesiones y los equipos.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🔒</div>
+                    <h3>Git con Disciplina</h3>
+                    <p>Nada de push directo a main sin review. Commits atómicos. Mensajes claros. El futuro yo lo agradecerá.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🤖</div>
+                    <h3>IA-Assisted</h3>
+                    <p>La IA no reemplaza al desarrollador. Lo multiplica. Uso agentes de IA para acelerar sin comprometer la excelencia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Proyectos Destacados</h2>
+                <p>Soluciones empresariales con impacto real</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🏠 SaaS de Control Residencial</h3>
+                        <p>Plataforma multi-tenant para gestión de colonias residenciales. Facturación automatizada, control de accesos y comunicación con residentes.</p>
+                        <div class="project-tech">
+                            <span>Angular</span>
+                            <span>Firebase</span>
+                            <span>WhatsApp API</span>
+                            <span>PDF Generation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>🏥 Plataforma Médica con IA</h3>
+                        <p>Sistema de gestión médica integrado con WhatsApp. Agendamiento, recordatorios, seguimiento de pacientes y triage con IA.</p>
+                        <div class="project-tech">
+                            <span>Firebase</span>
+                            <span>Angular</span>
+                            <span>OpenAI</span>
+                            <span>WhatsApp Cloud API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>📊 Dashboard de Control de Proyectos</h3>
+                        <p>Panel ejecutivo para seguimiento de proyectos de desarrollo. Métricas en tiempo real, gestión de equipos y reportes automatizados.</p>
+                        <div class="project-tech">
+                            <span>Angular 18</span>
+                            <span>Firebase</span>
+                            <span>GitHub Actions</span>
+                            <span>PrimeNG</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>💳 Pagos Móviles PCI DSS</h3>
+                        <p>Sistema de pagos móviles certificado PCI DSS para fintech nacional. Integración con gateways de pago y billeteras digitales.</p>
+                        <div class="project-tech">
+                            <span>iOS (Swift)</span>
+                            <span>Android (Kotlin)</span>
+                            <span>PCI DSS</span>
+                            <span>Tokenization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>👶 Rastreo de Pañales para Bebés</h3>
+                        <p>App freemium para seguimiento de cambios de pañal, predicción de compras y gestión multi-hijo. Modelo de pago único por hijo.</p>
+                        <div class="project-tech">
+                            <span>Angular 18</span>
+                            <span>Firebase</span>
+                            <span>PrimeNG</span>
+                            <span>Predictive Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>📋 Kanban SaaS para Devs</h3>
+                        <p>Plataforma de gestión de proyectos para desarrolladores. Integración con GitHub/GitLab, métricas de velocidad y reportes automáticos.</p>
+                        <div class="project-tech">
+                            <span>Firebase</span>
+                            <span>iOS (SwiftUI)</span>
+                            <span>Android (Jetpack Compose)</span>
+                            <span>Freemium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Cristian Mercado</h3>
+                    <p>Arquitecto de Software & Project Director</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:cmercadogallardo@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/cristian-mercado-gallardo-b0990441" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://github.com/cmercadogallardo" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Cristian Mercado. Todos los derechos reservados.</p>
+                <p style="margin-top: 12px; opacity: 0.6;">Diseñado con influencia de TARS, CASE y KIPP 🤖 • Hecho con OpenCode CLI + GitHub Copilot</p>
+                <div class="agent-links">
+                    <a href="index.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.875rem;">🏠 Cristian</a>
+                    <a href="tars.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.875rem;">🤖 TARS</a>
+                    <a href="case.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.875rem;">🔧 CASE</a>
+                    <a href="kipp.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.875rem;">🔬 KIPP</a>
+                    <a href="plex.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.875rem;">⚡ PLEX</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

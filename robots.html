@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo Robótico Gargantua - AI Agents</title>
+    <style>
+        :root {
+            --primary: #0A192F;
+            --secondary: #64FFDA;
+            --accent: #00B4D8;
+            --text: #CCD6F6;
+            --text-light: #8892B0;
+            --bg: #020C1B;
+            --card-bg: #112240;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero .robot-icon {
+            font-size: clamp(4rem, 15vw, 8rem);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-dot:hover,
+        .nav-dot.active {
+            background: var(--secondary);
+            transform: scale(1.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
+        }
+
+        .team-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-card .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .team-card h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .team-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .team-card .specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .team-card .spec-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        /* Workflow Diagram */
+        .workflow-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+
+        .workflow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            min-width: 600px;
+        }
+
+        .workflow-row {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .workflow-node {
+            background: var(--bg);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            min-width: 180px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .workflow-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+
+        .workflow-node.human {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(100, 255, 218, 0.05));
+        }
+
+        .workflow-node .icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .workflow-node .label {
+            color: var(--secondary);
+            font-weight: bold;
+            display: block;
+        }
+
+        .workflow-node .desc {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .workflow-arrow {
+            font-size: 2rem;
+            color: var(--secondary);
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+
+        .workflow-arrow.vertical {
+            transform: rotate(90deg);
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(0); }
+            50% { opacity: 1; transform: translateX(5px); }
+        }
+
+        .workflow-arrow.down {
+            transform: rotate(90deg);
+            animation: arrowPulseDown 2s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulseDown {
+            0%, 100% { opacity: 0.5; transform: rotate(90deg) translateX(0); }
+            50% { opacity: 1; transform: rotate(90deg) translateX(5px); }
+        }
+
+        /* Success Story */
+        .success-story {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(100, 255, 218, 0.05) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-story::before {
+            content: '✨';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .success-story h3 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-story .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .success-story .metric {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .success-story .metric-value {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+            display: block;
+        }
+
+        .success-story .metric-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .success-story ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .success-story li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .success-story li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Infrastructure */
+        .infra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .infra-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .infra-card h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .infra-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--primary);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        footer .disclaimer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-dots {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .workflow-container {
+                padding: 1.5rem;
+            }
+
+            .workflow-node {
+                min-width: 140px;
+                padding: 1rem;
+            }
+
+            .success-story {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" onclick="scrollToSection('hero')" title="Inicio"></div>
+        <div class="nav-dot" onclick="scrollToSection('infrastructure')" title="Infraestructura"></div>
+        <div class="nav-dot" onclick="scrollToSection('team')" title="Equipo"></div>
+        <div class="nav-dot" onclick="scrollToSection('workflow')" title="Flujo"></div>
+        <div class="nav-dot" onclick="scrollToSection('success')" title="Caso de Éxito"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero" id="hero">
+        <div class="robot-icon">🤖</div>
+        <h1>Equipo Robótico Gargantua</h1>
+        <p class="subtitle">
+            Infraestructura agéntica multi-robot para desarrollo de software, investigación y coordinación de proyectos
+        </p>
+    </div>
+
+    <!-- Infrastructure Section -->
+    <section id="infrastructure">
+        <h2>🏗️ Infraestructura</h2>
+        <div class="infra-grid">
+            <div class="infra-card">
+                <h4><span>🌐</span> Canales de Comunicación</h4>
+                <p>Discord como hub central para coordinación en tiempo real entre agentes y supervisión humana</p>
+            </div>
+            <div class="infra-card">
+                <h4><span>📚</span> Base de Conocimiento</h4>
+                <p>Gargantua: Repositorio central de documentación, especificaciones y memoria del equipo</p>
+            </div>
+            <div class="infra-card">
+                <h4><span>🧠</span> Modelos de IA</h4>
+                <p>Combinación híbrida de modelos locales (baja latencia) y cloud (alta capacidad) según la tarea</p>
+            </div>
+            <div class="infra-card">
+                <h4><span>🔧</span> Herramientas</h4>
+                <p>OpenClaw como orquestador principal, con integración a GitHub, APIs externas y CLI tools</p>
+            </div>
+            <div class="infra-card">
+                <h4><span>💾</span> Almacenamiento</h4>
+                <p>File system compartido con estructura organizada por proyectos, memoria y documentación</p>
+            </div>
+            <div class="infra-card">
+                <h4><span>🤖</span> Agentes Autónomos</h4>
+                <p>Múltiples agentes especializados trabajando en paralelo con roles y responsabilidades definidas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2>👥 El Equipo</h2>
+        <div class="team-grid">
+            <!-- TARS -->
+            <div class="team-card">
+                <span class="emoji">🤖</span>
+                <h3>TARS</h3>
+                <span class="role">Coordinador & Manager</span>
+                <p>
+                    Inspirado en Interstellar. Coordinador principal del equipo, manager de proyectos y punto de contacto con supervisión humana. Especialista en planificación, documentación y comunicación.
+                </p>
+                <div class="specs">
+                    <span class="spec-tag">OpenClaw</span>
+                    <span class="spec-tag">Coordinación</span>
+                    <span class="spec-tag">20% Humor</span>
+                </div>
+            </div>
+
+            <!-- CASE -->
+            <div class="team-card">
+                <span class="emoji">💻</span>
+                <h3>CASE</h3>
+                <span class="role">Desarrollador Principal</span>
+                <p>
+                    Especialista en desarrollo de software full-stack. Implementa especificaciones técnicas, crea features, refactoriza código y mantiene calidad. Trabaja con múltiples stacks y frameworks.
+                </p>
+                <div class="specs">
+                    <span class="spec-tag">Angular</span>
+                    <span class="spec-tag">Flutter</span>
+                    <span class="spec-tag">Firebase</span>
+                    <span class="spec-tag">Node.js</span>
+                </div>
+            </div>
+
+            <!-- KIPP -->
+            <div class="team-card">
+                <span class="emoji">🔬</span>
+                <h3>KIPP</h3>
+                <span class="role">Investigador & Analista</span>
+                <p>
+                    Responsable de investigación técnica, análisis competitivo y generación de briefings. Explora nuevas tecnologías, evalúa herramientas y prepara reportes ejecutivos.
+                </p>
+                <div class="specs">
+                    <span class="spec-tag">Research</span>
+                    <span class="spec-tag">Análisis</span>
+                    <span class="spec-tag">Briefings</span>
+                </div>
+            </div>
+
+            <!-- Indian Drone -->
+            <div class="team-card">
+                <span class="emoji">🛸</span>
+                <h3>Indian Drone</h3>
+                <span class="role">Sincronizador Autónomo</span>
+                <p>
+                    Agente autónomo que gravita alrededor de la base de conocimiento. Realiza sincronización Git automática, merge de cambios y mantiene coherencia entre nodos distribuidos.
+                </p>
+                <div class="specs">
+                    <span class="spec-tag">Git Sync</span>
+                    <span class="spec-tag">Auto-Merge</span>
+                    <span class="spec-tag">Background</span>
+                </div>
+            </div>
+
+            <!-- Humano -->
+            <div class="team-card human-card" style="border-color: var(--accent);">
+                <span class="emoji">👨‍💼</span>
+                <h3>Supervisión Humana</h3>
+                <span class="role">Director & Decision Maker</span>
+                <p>
+                    Toma decisiones estratégicas, aprueba cambios críticos, define prioridades y proporciona contexto del mundo real. El equipo trabaja bajo su dirección.
+                </p>
+                <div class="specs">
+                    <span class="spec-tag">Dirección</span>
+                    <span class="spec-tag">Aprobaciones</span>
+                    <span class="spec-tag">Estrategia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow">
+        <h2>🔄 Flujo de Colaboración</h2>
+        <div class="workflow-container">
+            <div class="workflow-diagram">
+                <!-- Row 1: Human Input -->
+                <div class="workflow-row">
+                    <div class="workflow-node human">
+                        <span class="icon">👨‍💼</span>
+                        <span class="label">Humano</span>
+                        <span class="desc">Solicitud / Briefing</span>
+                    </div>
+                </div>
+
+                <div class="workflow-arrow">⬇️</div>
+
+                <!-- Row 2: TARS Processing -->
+                <div class="workflow-row">
+                    <div class="workflow-node">
+                        <span class="icon">🤖</span>
+                        <span class="label">TARS</span>
+                        <span class="desc">Analiza, Planifica, Documenta</span>
+                    </div>
+                </div>
+
+                <div class="workflow-arrow">⬇️</div>
+
+                <!-- Row 3: Parallel Work -->
+                <div class="workflow-row">
+                    <div class="workflow-node">
+                        <span class="icon">💻</span>
+                        <span class="label">CASE</span>
+                        <span class="desc">Desarrollo</span>
+                    </div>
+                    <div class="workflow-node">
+                        <span class="icon">🔬</span>
+                        <span class="label">KIPP</span>
+                        <span class="desc">Investigación</span>
+                    </div>
+                </div>
+
+                <div class="workflow-arrow">⬇️</div>
+
+                <!-- Row 4: Integration -->
+                <div class="workflow-row">
+                    <div class="workflow-node">
+                        <span class="icon">🛸</span>
+                        <span class="label">Indian Drone</span>
+                        <span class="desc">Sync & Merge Automático</span>
+                    </div>
+                </div>
+
+                <div class="workflow-arrow">⬇️</div>
+
+                <!-- Row 5: Delivery -->
+                <div class="workflow-row">
+                    <div class="workflow-node human">
+                        <span class="icon">👨‍💼</span>
+                        <span class="label">Humano</span>
+                        <span class="desc">Revisión & Aprobación</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center; color: var(--text-light);">
+            <p><strong>Ciclo típico:</strong> Solicitud → Planificación (TARS) → Ejecución Paralela (CASE + KIPP) → Sincronización (Indian Drone) → Entrega</p>
+        </div>
+    </section>
+
+    <!-- Success Story Section -->
+    <section id="success">
+        <h2>✨ Caso de Éxito</h2>
+        <div class="success-story">
+            <h3>Landing Pages Multi-Agente</h3>
+            <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+                Implementación completa de landing pages para el equipo robótico, demostrando coordinación efectiva entre múltiples agentes.
+            </p>
+
+            <div class="metrics">
+                <div class="metric">
+                    <span class="metric-value">4</span>
+                    <span class="metric-label">Páginas Creadas</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">&lt;24h</span>
+                    <span class="metric-label">Tiempo Total</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">100%</span>
+                    <span class="metric-label">Automatizado</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">0</span>
+                    <span class="metric-label">Errores en Prod</span>
+                </div>
+            </div>
+
+            <h4 style="color: var(--secondary); margin-top: 2rem;">Agentes Involucrados:</h4>
+            <ul>
+                <li><strong>TARS:</strong> Coordinación general, especificaciones, documentación</li>
+                <li><strong>CASE:</strong> Implementación de código HTML/CSS, deploy automatizado</li>
+                <li><strong>KIPP:</strong> Investigación de mejores prácticas, análisis de referencias</li>
+                <li><strong>Indian Drone:</strong> Sincronización de cambios en repositorio</li>
+            </ul>
+
+            <h4 style="color: var(--secondary); margin-top: 2rem;">Resultados:</h4>
+            <ul>
+                <li>Landing pages individuales para cada agente del equipo</li>
+                <li>Navegación cruzada entre todas las páginas</li>
+                <li>Deploy automatizado vía FTP</li>
+                <li>Documentación completa en base de conocimiento</li>
+                <li>Plantilla reutilizable para futuros proyectos</li>
+            </ul>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg); border-radius: 10px; border-left: 4px solid var(--secondary);">
+                <p style="color: var(--text-light); font-style: italic;">
+                    "Este proyecto demostró la efectividad del modelo multi-agente: coordinación centralizada (TARS) + ejecución paralela (CASE + KIPP) + sincronización automática (Indian Drone) = Entrega rápida y de calidad."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Equipo Robótico Gargantua © 2026</p>
+        <p style="margin-top: 0.5rem; color: var(--secondary);">Desarrollado con 🤖 y ☕</p>
+        <div class="disclaimer">
+            <p>⚠️ Esta página es informativa y no revela datos sensibles, credenciales, información de red, accesos, nombres de empresas o colaboradores.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll to section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Update active nav dot on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['hero', 'infrastructure', 'team', 'workflow', 'success'];
+            const scrollPosition = window.scrollY + 200;
+
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                const dots = document.querySelectorAll('.nav-dot');
+
+                if (section.offsetTop <= scrollPosition && 
+                    section.offsetTop + section.offsetHeight > scrollPosition) {
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and nodes
+        document.querySelectorAll('.team-card, .workflow-node, .infra-card, .success-story').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
