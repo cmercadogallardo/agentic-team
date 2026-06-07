@@ -1,6 +1,6 @@
 # 🚀 Landing Pages - Equipo Robótico ERTYUM
 
-**Última actualización:** 2026-05-13  
+**Última actualización:** 2026-06-06  
 **Estado:** ✅ Desplegado en `ftp.ertyum.com`
 
 ---
@@ -14,6 +14,7 @@ landing-page/
 ├── tars.html               ← Landing page de TARS
 ├── case.html               ← Landing page de CASE
 ├── kipp.html               ← Landing page de KIPP
+├── spin.html               ← Landing page de SPIN
 ├── README.md               ← Este archivo
 ├── HISTORICO-CRISTIAN.md   ← README original de Cristian (archivo histórico)
 ├── HISTORICO-TARS.md       ← README original de TARS (archivo histórico)
@@ -27,7 +28,7 @@ landing-page/
 
 ## 🎯 Propósito
 
-Consolidar las landing pages del equipo robótico (TARS, CASE, KIPP) y de Cristian Mercado en un único directorio desplegable vía FTP.
+Consolidar las landing pages del equipo robótico (TARS, CASE, KIPP, PLEX, SPIN) y de Cristian Mercado en un único directorio desplegable vía FTP.
 
 **Index raíz:** La landing page de Cristian es el punto de entrada principal (`index.html`).
 
@@ -57,6 +58,11 @@ Consolidar las landing pages del equipo robótico (TARS, CASE, KIPP) y de Cristi
 - **Rol:** Investigación, análisis de datos, síntesis de información
 - **Archivo:** `kipp.html`
 
+### SPIN - Social Positioning, Influence & Narrative
+- **Personalidad:** femenina, sassy, elegante, estratégica
+- **Rol:** marketing, branding, social media, narrativa y growth
+- **Archivo:** `spin.html`
+
 ---
 
 ## 📦 Despliegue FTP
@@ -85,6 +91,7 @@ curl -T plex.html --user "$FTP_USER:$FTP_PASS" ftp://$FTP_HOST/plex.html
 curl -T tars.html --user "$FTP_USER:$FTP_PASS" ftp://$FTP_HOST/tars.html
 curl -T case.html --user "$FTP_USER:$FTP_PASS" ftp://$FTP_HOST/case.html
 curl -T kipp.html --user "$FTP_USER:$FTP_PASS" ftp://$FTP_HOST/kipp.html
+curl -T spin.html --user "$FTP_USER:$FTP_PASS" ftp://$FTP_HOST/spin.html
 ```
 
 ---
@@ -98,10 +105,16 @@ Una vez desplegado:
 - **TARS:** https://cristian.ertyum.com/tars.html
 - **CASE:** https://cristian.ertyum.com/case.html
 - **KIPP:** https://cristian.ertyum.com/kipp.html
+- **SPIN:** https://cristian.ertyum.com/spin.html
 
 ---
 
 ## 📝 Cambios Recientes
+
+### 2026-06-06 - SPIN Landing Page ✅
+- ✅ Creado `spin.html` con identidad propia de marketing, branding y growth
+- ✅ Agregado link de SPIN en el footer de `index.html`
+- ✅ Documentación actualizada en README.md e INSTRUCCIONES-EQUIPO.md
 
 ### 2026-05-27 - PLEX Landing Page ✅
 - ✅ Creado `plex.html` con personalidad de inteligencia superior

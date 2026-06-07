@@ -1,12 +1,12 @@
 # 📢 Instrucciones para el Equipo Robótico - Landing Pages
 
-**Fecha:** 2026-05-13
+**Fecha:** 2026-06-06
 
 ---
 
 ## 🎯 Instrucción Única
 
-**TARS, CASE, KIPP:** Las landing pages se consolidaron en `documentation/landing-page/` (los directorios individuales ya no existen). **Regla de oro:** Lee primero `landing-page/README.md` y modifica **SOLO tu propio archivo** (`tars.html`, `case.html`, o `kipp.html` — nunca el de otro ni el `index.html` de Cristian). **IMPORTANTE: SOLO TARS puede desplegar al FTP.** CASE y KIPP solo editan y hacen git push, luego notifican a TARS para el despliegue. Credenciales FTP en TOOLS.md (`cristian@ertyum.com`). Si tienes dudas, el README tiene el flujo completo.
+**TARS, CASE, KIPP, PLEX y SPIN:** Las landing pages se consolidaron en `documentation/landing-page/` (los directorios individuales ya no existen). **Regla de oro:** Lee primero `landing-page/README.md` y modifica **SOLO tu propio archivo** (`tars.html`, `case.html`, `kipp.html`, `plex.html` o `spin.html` — nunca el de otro ni el `index.html` de Cristian). **IMPORTANTE: SOLO TARS puede desplegar al FTP.** Los demás agentes solo editan y hacen git push, luego notifican a TARS para el despliegue. Credenciales FTP en TOOLS.md (`cristian@ertyum.com`). Si tienes dudas, el README tiene el flujo completo.
 
 ---
 
@@ -17,7 +17,9 @@ documentation/landing-page/
 ├── index.html        ← Cristian (página principal)
 ├── tars.html         ← TARS
 ├── case.html         ← CASE
-└── kipp.html         ← KIPP
+├── kipp.html         ← KIPP
+├── plex.html         ← PLEX
+└── spin.html         ← SPIN
 ```
 
 **URLs públicas:**
@@ -25,6 +27,8 @@ documentation/landing-page/
 - https://cristian.ertyum.com/tars.html (TARS)
 - https://cristian.ertyum.com/case.html (CASE)
 - https://cristian.ertyum.com/kipp.html (KIPP)
+- https://cristian.ertyum.com/plex.html (PLEX)
+- https://cristian.ertyum.com/spin.html (SPIN)
 
 ---
 
@@ -41,6 +45,8 @@ Antes de hacer cualquier cambio, lee `documentation/landing-page/README.md`. Ah�
 - **TARS:** Solo edita `tars.html`
 - **CASE:** Solo edita `case.html`
 - **KIPP:** Solo edita `kipp.html`
+- **PLEX:** Solo edita `plex.html`
+- **SPIN:** Solo edita `spin.html`
 - **Cristian:** Solo edita `index.html`
 
 **No modifiques las landings de tus compañeros** a menos que te lo pidan explícitamente.
@@ -68,6 +74,8 @@ git pull
 # TARS: nano tars.html
 # CASE: nano case.html
 # KIPP: nano kipp.html
+# PLEX: nano plex.html
+# SPIN: nano spin.html
 
 # 4. Commit con mensaje claro
 git add tu-archivo.html
@@ -118,7 +126,7 @@ curl -T tu-archivo.html \
 
 ## 💡 Tips Pro
 
-- **Links entre landings:** Si quieres linkear a otro robot, usa rutas relativas: `tars.html`, `case.html`, `kipp.html`.
+- **Links entre landings:** Si quieres linkear a otro robot, usa rutas relativas: `tars.html`, `case.html`, `kipp.html`, `plex.html`, `spin.html`.
 - **Imágenes:** Usa URLs externas o base64 inline (el FTP no tiene carpeta de assets pública aún).
 - **CSS/JS:** Todo inline por ahora (mismo motivo).
 - **Peso:** Mantén tu archivo bajo 50 KB si es posible (carga rápida).
