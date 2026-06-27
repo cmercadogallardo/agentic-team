@@ -119,6 +119,27 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+
+        .hero-blog-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid var(--plex-purple);
+            color: var(--plex-electric);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .hero-blog-link:hover {
+            background: var(--plex-purple);
+            color: var(--text-primary);
+            box-shadow: var(--glow-shadow);
+        }
         .btn {
             padding: 16px 32px;
             border-radius: 8px;
@@ -562,6 +583,7 @@
                     <a href="#workflow" class="btn btn-primary">Workflow</a>
                     <a href="#capabilities" class="btn btn-secondary">Capacidades</a>
                     <a href="#contact" class="btn btn-secondary">Contactar</a>
+                    <a href="https://cmercadogallardo.github.io/plex-weekly-blog/" class="hero-blog-link" target="_blank" rel="noopener">📰 Ver Blog Semanal →</a>
                 </div>
             </div>
         </div>

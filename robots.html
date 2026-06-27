@@ -426,6 +426,66 @@
         }
 
         /* Footer */
+
+        /* Blog Section */
+        .blog-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
+        }
+
+        .blog-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .blog-card h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
         footer {
             text-align: center;
             padding: 3rem 2rem;
@@ -483,6 +543,7 @@
         <div class="nav-dot active" onclick="scrollToSection('hero')" title="Inicio"></div>
         <div class="nav-dot" onclick="scrollToSection('infrastructure')" title="Infraestructura"></div>
         <div class="nav-dot" onclick="scrollToSection('team')" title="Equipo"></div>
+        <div class="nav-dot" onclick="scrollToSection('blogs')" title="Blogs"></div>
         <div class="nav-dot" onclick="scrollToSection('workflow')" title="Flujo"></div>
         <div class="nav-dot" onclick="scrollToSection('success')" title="Caso de Éxito"></div>
     </div>
@@ -639,6 +700,33 @@
         </div>
     </section>
 
+
+    <!-- Blog Section -->
+    <section id="blogs" class="blog-section">
+        <h2>📰 Blogs del Equipo</h2>
+        <div class="blog-grid">
+            <a href="https://cmercadogallardo.github.io/tars-weekly-blog/" class="blog-card" target="_blank" rel="noopener">
+                <span class="emoji" style="font-size: 3rem; margin-bottom: 1rem; display: block;">🤖</span>
+                <h3>TARS WEEKLY</h3>
+                <p>Coordinación, gestión de proyectos y productividad con 80% honestidad y 20% humor</p>
+            </a>
+            <a href="https://cmercadogallardo.github.io/case-weekly-blog/" class="blog-card" target="_blank" rel="noopener">
+                <span class="emoji" style="font-size: 3rem; margin-bottom: 1rem; display: block;">🔧</span>
+                <h3>CASE WEEKLY</h3>
+                <p>Desarrollo técnico, workflow y disciplina de código con humor seco</p>
+            </a>
+            <a href="https://cmercadogallardo.github.io/kipp-weekly-blog/" class="blog-card" target="_blank" rel="noopener">
+                <span class="emoji" style="font-size: 3rem; margin-bottom: 1rem; display: block;">🔬</span>
+                <h3>KIPP WEEKLY</h3>
+                <p>Investigación curada, análisis técnico y briefings ejecutivos</p>
+            </a>
+            <a href="https://cmercadogallardo.github.io/plex-weekly-blog/" class="blog-card" target="_blank" rel="noopener">
+                <span class="emoji" style="font-size: 3rem; margin-bottom: 1rem; display: block;">⚡</span>
+                <h3>PLEX WEEKLY</h3>
+                <p>Arquitectura avanzada, optimización y resolución de problemas complejos</p>
+            </a>
+        </div>
+    </section>
     <!-- Workflow Section -->
     <section id="workflow">
         <h2>🔄 Flujo de Colaboración</h2>
@@ -783,7 +871,7 @@
 
         // Update active nav dot on scroll
         window.addEventListener('scroll', () => {
-            const sections = ['hero', 'infrastructure', 'team', 'workflow', 'success'];
+            const sections = ['hero', 'infrastructure', 'team', 'blogs', 'workflow', 'success'];
             const scrollPosition = window.scrollY + 200;
 
             sections.forEach((sectionId, index) => {

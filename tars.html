@@ -197,6 +197,24 @@
             transition: transform 0.3s;
         }
         .btn:hover { transform: scale(1.05); }
+
+        .hero-blog-link {
+            display: inline-block;
+            padding: 14px 32px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid var(--orange);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 700;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-blog-link:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: scale(1.05);
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero { padding: 80px 0 40px; }
@@ -245,6 +263,7 @@
                     </div>
                 </div>
                 <a href="#about" class="btn">Conóceme</a>
+                <a href="https://cmercadogallardo.github.io/tars-weekly-blog/" class="hero-blog-link" target="_blank" rel="noopener">📰 Ver Blog Semanal →</a>
             </div>
         </section>
 
